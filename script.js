@@ -1,6 +1,6 @@
 const clientSecret = `25d5efd65d8b5cab2e461ebe98e3117b76766e8e`
 let accessToken = `8a15d84d3f5dce03a5fd1e3eabf95ed314b0b117`
-let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${accessToken}`
+let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${accessToken}` //old one, only works if accessToken is hard coded & up to date
 const refreshToken = `34a4515d34fcddd543ed7a03b8e572397a6386b7`
 const clientId = `89151`
 
@@ -11,6 +11,17 @@ const authLink = 'https://www.strava.com/oauth/token'
 
 const getLoggedInAthleteStarredSegments = (res) => {
   let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${res.access_token}`
+  searchButton.addEventListener('click', async () => {
+    let userInput = inputBar.value
+    const response = await axios.get(starredSegmentsLink)
+    for (let i = 0; i < response.data.length; i++) {
+      const segmentName = response.data[i].name
+      const listItem = document.createElement('li')
+
+      listItem.innerHTML = `${segmentName}`
+      segmentList.append(listItem)
+    }
+  })
 }
 
 const reAuthorize = () => {
@@ -55,18 +66,6 @@ reAuthorize()
 
 const inputBar = document.getElementById('search-input')
 const searchButton = document.getElementById('search')
-
-searchButton.addEventListener('click', async () => {
-  let userInput = inputBar.value
-  const response = await axios.get(starredSegmentsLink)
-  for (let i = 0; i < response.data.length; i++) {
-    const segmentName = response.data[i].name
-    const listItem = document.createElement('li')
-
-    listItem.innerHTML = `${segmentName}`
-    segmentList.append(listItem)
-  }
-})
 
 //*** STRAVA'S JS CODE ON THE API SITE ***/
 // let StravaApiV3 = 'strava_api_v3'
