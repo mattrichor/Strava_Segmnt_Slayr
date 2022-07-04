@@ -8,7 +8,7 @@ Strava_Segmnt_Slayr
 ***
 
 ### ***Description***
-A tool to search, sort, and see how you'd compete on Strava segments. Base functionality will be to make an API call to the Strava database of segments, and be able to accurately sort them in an area by designators such as avg gradient, length, etc. Stretch goals of this project are to create a graph for power zones based on user inputs, utilizing accurate math formulas to accurately predict the time the user will take to complete a segment based on those power 
+A tool to search, sort, and see how you'd compete on Strava segments. Base functionality will be to make an API call to the Strava database of segments, and be able to accurately sort them in an area by designators such as avg gradient, length, etc. Stretch goals of this project are to create a graph for power zones based on user inputs, utilizing accurate math formulas to accurately predict the time the user will take to complete a segment based on that power 
 ***
 
 ### ***Technologies Used***
