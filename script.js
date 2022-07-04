@@ -6,6 +6,15 @@ const clientId = `89151`
 
 let segmentList = document.querySelector('.segment-list')
 
+const inputBar = document.getElementById('search-input')
+const searchButton = document.getElementById('search')
+const powerButton = document.getElementById('calculate-curve')
+
+const pwr5Sec = document.getElementById('5sec')
+const pwr1Min = document.getElementById('1min')
+const pwr5Min = document.getElementById('5min')
+const pwr20Min = document.getElementById('20min')
+
 // const createGradeColors = (num) => {}
 
 const timeToReadable = (time) => {
@@ -23,11 +32,37 @@ const timeToReadable = (time) => {
   }
 }
 
-let powerChart = new Chart('Pwr Chart', {
-  type: 'line',
-  data: {},
-  options: {}
-})
+//create 'onclick' for calculate power curve button
+const calcPowerChart = () => {
+  let yValues = [pwr5Sec.value, pwr1Min.value, pwr5Min.value, pwr20Min.value]
+  //     { x: 5, y: pwr5Sec.value },
+  //     { x: 60, y: pwr1Min.value },
+  //     { x: 300, y: pwr5Min.value },
+  //     { x: 1200, y: pwr20Min.value }
+  //   ]
+  //   console.log(xyValues)
+  new Chart('pwr-graph', {
+    type: 'line',
+    data: {
+      labels: [5, 60, 300, 1200],
+      datasets: [
+        {
+          data: yValues,
+          pointRadius: 3,
+          pointBackgroundColor: 'rgba(249, 234, 224,1)',
+          borderColor: 'rgba(81, 123, 159,1)',
+          fill: false
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false
+    }
+  })
+}
+
+powerButton.addEventListener('click', calcPowerChart)
+
 // const gradientCreator = (gradient) => {
 //   const newListItem = gradient
 // const gradeMath = (gradient / 20) * 100
@@ -104,9 +139,6 @@ const reAuthorize = () => {
 }
 
 reAuthorize()
-
-const inputBar = document.getElementById('search-input')
-const searchButton = document.getElementById('search')
 
 //   {
 //     segmName: response.data[i].name,
