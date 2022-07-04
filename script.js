@@ -6,6 +6,8 @@ const clientId = `89151`
 
 let segmentList = document.querySelector('.segment-list')
 
+// const createGradeColors = (num) => {}
+
 const timeToReadable = (time) => {
   if (time == undefined) {
     return 'No Segment Efforts'
@@ -21,11 +23,24 @@ const timeToReadable = (time) => {
   }
 }
 
+let powerChart = new Chart('Pwr Chart', {
+  type: 'line',
+  data: {},
+  options: {}
+})
+// const gradientCreator = (gradient) => {
+//   const newListItem = gradient
+// const gradeMath = (gradient / 20) * 100
+//   newListItem.style.backgroundColor = `rgb(${gradeMath * 2.56}, ${
+//     100 - gradeMath * 2.56
+//   },0) `
+// }
+
 class Segment {
   constructor(segName, segDistance, segGrade, segClimbCat, segPrTime) {
     this.segName = segName
     this.segDistance = `${(segDistance * 0.000621371).toFixed(2)} mi`
-    this.segGrade = `${segGrade}%`
+    this.segGrade = segGrade
     this.segClimbCat = segClimbCat
     this.segPrTime = timeToReadable(segPrTime)
   }
@@ -48,13 +63,19 @@ const getLoggedInAthleteStarredSegments = (res) => {
 
       console.log(segment)
       const listItem = document.createElement('tr')
-      //   console.log(response.data[i])
       listItem.innerHTML = `<th>${segment.segName}</th>
       <th>${segment.segDistance}</th>
-      <th>${segment.segGrade}</th>
+      <th class='gradient'>${segment.segGrade} % </th>
       <th>${segment.segClimbCat}</th>
       <th>${segment.segPrTime}</th>`
+
       segmentList.append(listItem)
+      let gradient = document.querySelector('.gradient')
+      const gradeMath = ((segment.segGrade + 4) / 19) * 100
+      gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
+        (100 - gradeMath) * 2.2
+      },0) `
+      gradient.classList.remove('gradient')
     }
   })
 }

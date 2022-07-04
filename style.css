@@ -6,7 +6,7 @@
 }
 body {
     text-align: center;
-    background-color: rgb(228, 147, 88);
+    background-color: rgb(212, 121, 85);
 }
 
 ul {
@@ -36,10 +36,13 @@ table, th, td {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    border: 3px solid purple;
+    border: 3px solid rgb(25, 21, 25);
 }
 
 .table-top {
-    
+    background-color: rgb(81, 123, 159);
+    color: rgb(249, 234, 224);
 }
 
+.gradient {
+}
