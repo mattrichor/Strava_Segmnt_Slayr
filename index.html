@@ -11,7 +11,21 @@
 </head>
 <body>
 <h1>Strava Segmnt Slayr</h1>
-    <div class="search-section">  
+<div class="container"> 
+    <!-- power zones graph -->
+    <h3 id="pwr-graph">THIS IS A RECTANGLE </h3>
+    <div class="power-inputs">
+        <ul>
+        <li><input type="text" id="5sec" placeholder="5 Sec" /></li>
+        <li><input type="text" id="1min" placeholder="1 Min" /></li>
+        <li><input type="text" id="5min" placeholder="5 Min" /></li>
+        <li><input type="text" id="20min" placeholder="20 Min" /></li>
+        <li><button id="calculate-curve"> Calculate Power Curve</button></li>
+    </ul>
+    </div>
+</div>
+
+<div class="search-section">  
         <input type="text" id="search-input" placeholder="Segment Name" />
         <button id="search">Send it!</button>
         
