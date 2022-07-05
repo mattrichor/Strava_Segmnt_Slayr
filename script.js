@@ -34,12 +34,12 @@ const timeToReadable = (time) => {
 
 //create 'onclick' for calculate power curve button
 const calcPowerChart = () => {
-  let yValues = [pwr5Sec.value, pwr1Min.value, pwr5Min.value, pwr20Min.value]
-  //     { x: 5, y: pwr5Sec.value },
-  //     { x: 60, y: pwr1Min.value },
-  //     { x: 300, y: pwr5Min.value },
-  //     { x: 1200, y: pwr20Min.value }
-  //   ]
+  let yValues = [
+    { x: 5, y: pwr5Sec.value },
+    { x: 60, y: pwr1Min.value },
+    { x: 300, y: pwr5Min.value },
+    { x: 1200, y: pwr20Min.value }
+  ]
   //   console.log(xyValues)
   new Chart('pwr-graph', {
     type: 'line',

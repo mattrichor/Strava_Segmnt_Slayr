@@ -35,6 +35,11 @@ ul {
     
 }
 
+
+.search-section {
+    margin: 45px;
+}
+
 table, th, td {
     table-layout: fixed;
     width: 100%;
@@ -48,4 +53,8 @@ table, th, td {
 }
 
 .gradient {
+}
+
+a {
+    text-decoration: none;
 }
