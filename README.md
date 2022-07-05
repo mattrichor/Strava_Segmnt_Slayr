@@ -21,7 +21,7 @@ A tool to search, sort, and see how you'd compete on Strava segments. Base funct
 ***
 ### ***Getting Started***
 
-##### ![Wireframe]
+##### Wireframe
 link here: (https://wireframe.cc/pro/pp/8dacb167c563295)
 
 ***
@@ -29,10 +29,11 @@ link here: (https://wireframe.cc/pro/pp/8dacb167c563295)
 
 ***
 ### ***Task Lists***
-## ![Trello Board]
+## Trello Board
 link here: (https://trello.com/b/ofKTtual/segmnt-slayr)
-- [ ] API Call Segment List 
-- [ ] Input Forms for Power Zones
+- [X] API Call Segment List
+- [ ] Segment List Sorting
+- [X] Input Forms for Power Zones
 - [ ] Power Zones Graph
 - [ ] Estimated Time on Segment
 
