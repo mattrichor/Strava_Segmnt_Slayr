@@ -21,14 +21,16 @@ A tool to search, sort, and see how you'd compete on Strava segments. Base funct
 ***
 ### ***Getting Started***
 
-##### ![Wireframe](https://wireframe.cc/pro/pp/8dacb167c563295)
+##### ![Wireframe]
+link here: (https://wireframe.cc/pro/pp/8dacb167c563295)
 
 ***
 ### ***Screenshots***
 
 ***
 ### ***Task Lists***
-## ![Trello Board](https://trello.com/b/ofKTtual/segmnt-slayr)
+## ![Trello Board]
+link here: (https://trello.com/b/ofKTtual/segmnt-slayr)
 - [ ] API Call Segment List 
 - [ ] Input Forms for Power Zones
 - [ ] Power Zones Graph
