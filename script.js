@@ -15,7 +15,7 @@ const pwr1Min = document.getElementById('1min')
 const pwr5Min = document.getElementById('5min')
 const pwr20Min = document.getElementById('20min')
 
-// const createGradeColors = (num) => {}
+const segmentArray = []
 
 const timeToReadable = (time) => {
   if (time == undefined) {
@@ -63,18 +63,10 @@ const calcPowerChart = () => {
 
 powerButton.addEventListener('click', calcPowerChart)
 
-// const gradientCreator = (gradient) => {
-//   const newListItem = gradient
-// const gradeMath = (gradient / 20) * 100
-//   newListItem.style.backgroundColor = `rgb(${gradeMath * 2.56}, ${
-//     100 - gradeMath * 2.56
-//   },0) `
-// }
-
 class Segment {
   constructor(segName, segDistance, segGrade, segClimbCat, segPrTime) {
     this.segName = segName
-    this.segDistance = `${(segDistance * 0.000621371).toFixed(2)} mi`
+    this.segDistance = (segDistance * 0.000621371).toFixed(2)
     this.segGrade = segGrade
     this.segClimbCat = segClimbCat
     this.segPrTime = timeToReadable(segPrTime)
@@ -95,14 +87,14 @@ const getLoggedInAthleteStarredSegments = (res) => {
         response.data[i].climb_category,
         response.data[i].pr_time
       )
+      segmentArray.push(segment)
 
-      console.log(segment)
       const listItem = document.createElement('tr')
-      listItem.innerHTML = `<th>${segment.segName}</th>
-      <th>${segment.segDistance}</th>
-      <th class='gradient'>${segment.segGrade} % </th>
-      <th>${segment.segClimbCat}</th>
-      <th>${segment.segPrTime}</th>`
+      listItem.innerHTML = `<td>${segment.segName}</td>
+        <td>${segment.segDistance} mi</td>
+        <td class='gradient'>${segment.segGrade} % </td>
+        <td>${segment.segClimbCat}</td>
+        <td>${segment.segPrTime}</td>`
 
       segmentList.append(listItem)
       let gradient = document.querySelector('.gradient')
@@ -140,10 +132,50 @@ const reAuthorize = () => {
 
 reAuthorize()
 
-//   {
-//     segmName: response.data[i].name,
-//     segDistance: response.data[i].distance,
-//     segGradient: response.data[i].average_grade,
-//     segClimbCat: response.data[i].climb_category,
-//     segPrTime: response.data[i].pr_time
-//   }
+let sortTable = Array.from(document.querySelectorAll('.sortable'))
+let table = document.getElementById('table')
+
+console.log(sortTable)
+
+function sortSegments(j) {
+  let switchCount = 0
+  let shouldSwitch = true
+  let switching = true
+  direction = 'ascending'
+
+  while (switching) {
+    switching = false
+    let rows = table.rows
+
+    for (i = 1; i < rows.length - 1; i++) {
+      shouldSwitch = false
+
+      let x = rows[i].getElementsByTagName('td')[j]
+      let y = rows[i + 1].getElementsByTagName('td')[j]
+      if (direction == 'ascending') {
+        if (
+          x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() ||
+          Number(x.innerHTML) > Number(y.innerHTML)
+        ) {
+          shouldSwitch = true
+          break
+        }
+      } else if (direction == 'descending') {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true
+          break
+        }
+      }
+    }
+    if (shouldSwitch == true) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i])
+      switching = true
+      switchCount++
+    } else {
+      if (switchCount == 0 && direction == 'ascending') {
+        direction = 'descending'
+        switching = true
+      }
+    }
+  }
+}

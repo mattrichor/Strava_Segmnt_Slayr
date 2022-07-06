@@ -18,10 +18,12 @@
     <canvas id="pwr-graph"> </canvas>
     <div class="power-inputs">
         <ul>
-        <li><input type="number" id="5sec" placeholder="5 Sec" /></li>
-        <li><input type="number" id="1min" placeholder="1 Min" /></li>
-        <li><input type="number" id="5min" placeholder="5 Min" /></li>
-        <li><input type="number" id="20min" placeholder="20 Min" /></li>
+        <li><input type="number" id="5sec" placeholder="5 Sec Power" /></li>
+        <li><input type="number" id="1min" placeholder="1 Min Power" /></li>
+        <li><input type="number" id="5min" placeholder="5 Min Power" /></li>
+        <li><input type="number" id="20min" placeholder="20 Min Power" /></li>
+        <li><input type="number" id="weight" placeholder="Your Weight" /></li>
+        <li><input type="number" id="bike-weight" placeholder="Bike Weight" /></li>
         <li><button id="calculate-curve"> Calculate Power Curve</button></li>
     </ul>
     </div>
@@ -36,17 +38,19 @@
 </div>
 
 <!-- Segment Display Section  -->
-<table class="segment-list">
+<table id="table">
+    <thead>
     <tr class="table-top">
-        <th>Name</th>
-        <th>Distance</th>
-        <th>Gradient</th>
-        <th>Climb Category</th>
-        <th>PR Time</th>
+        <th class='sortable'onclick="sortSegments(0)">Name</th>
+        <th class='sortable'onclick="sortSegments(1)">Distance</th>
+        <th class='sortable'onclick="sortSegments(2)">Gradient</th>
+        <th class='sortable'onclick="sortSegments(3)">Climb Category</th>
+        <th class='sortable'onclick="sortSegments(4)">PR Time</th>
         
-    </tr>
+    </tr></thead>
+    <tbody class="segment-list">
     <!-- segment list items will display here -->
-    
+    </tbody>
 </table>
 
 </body>

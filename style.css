@@ -7,6 +7,8 @@
 body {
     text-align: center;
     background-color: rgb(212, 121, 85);
+    background-image: linear-gradient(rgb(212, 121, 85),#542505);
+    background-repeat: no-repeat;
 }
 
 ul {
@@ -40,11 +42,18 @@ ul {
     margin: 45px;
 }
 
-table, th, td {
+table, td {
     table-layout: fixed;
-    width: 100%;
+    width: 83%;
     border-collapse: collapse;
     border: 3px solid rgb(25, 21, 25);
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(215, 208, 203);
+}
+
+th {
+    border: 1px solid rgb(41, 62, 79);
 }
 
 .table-top {
@@ -57,4 +66,9 @@ table, th, td {
 
 a {
     text-decoration: none;
+}
+
+h1 {
+    color: rgb(249, 234, 224);
+    background-color: rgb(81, 123, 159);
 }
