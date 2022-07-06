@@ -37,17 +37,61 @@ const timeToReadable = (time) => {
 
 //create 'onclick' for calculate power curve button
 const calcPowerChart = () => {
-  let yValues = [
-    { x: 5, y: pwr5Sec.value },
-    { x: 60, y: pwr1Min.value },
-    { x: 300, y: pwr5Min.value },
-    { x: 1200, y: pwr20Min.value }
-  ]
+  // let yValues = [
+  //   { x: 5, y: pwr5Sec.value },
+  //   { x: 60, y: pwr1Min.value },
+
+  // ]
+
+  // let i = 0.083
+
+  let yValues = [{ x: 5, y: pwr5Sec.value }]
+  let i = 0
+  const interp5To60 = (num) => {
+    let interp = d3.interpolate(
+      { x: 5, y: pwr5Sec.value },
+      { x: 60, y: pwr1Min.value }
+    )
+    return interp(num)
+  }
+
+  const interp60To300 = (num) => {
+    let interp = d3.interpolate(
+      { x: 60, y: pwr1Min.value },
+      { x: 300, y: pwr5Min.value }
+    )
+    return interp(num)
+  }
+
+  const interp3To12 = (num) => {
+    let interp = d3.interpolate(
+      { x: 300, y: pwr5Min.value },
+      { x: 1200, y: pwr20Min.value }
+    )
+    return interp(num)
+  }
+
+  // function for interpolating 5 secs to 1 min
+  for (i = 0.083; i < 1; i += 0.083) {
+    yValues.push(interp5To60(i))
+  }
+  yValues.push({ x: 60, y: pwr1Min.value })
+
+  for (let j = 0.021; j < 1; j += 0.021) {
+    yValues.push(interp60To300(j))
+  }
+  yValues.push({ x: 300, y: pwr5Min.value })
+
+  for (let k = 0.009; k < 1; k += 0.009) {
+    yValues.push(interp3To12(k))
+  }
+  yValues.push({ x: 1200, y: pwr20Min.value })
+  console.log(yValues)
   //   console.log(xyValues)
   new Chart('pwr-graph', {
     type: 'line',
     data: {
-      labels: [5, 60, 300, 1200],
+      labels: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13],
       datasets: [
         {
           data: yValues,
@@ -76,17 +120,14 @@ class Segment {
   }
 }
 
-// const getPokeApi = () => {
-//   let input = inputBar.value
-//   axios.get(starredSegmentsLink + input).then((response) => {
-//     displaySegment(response)
-//   })
-// }
-// searchButton
-//   let userInput = inputBar.value
-// displaySegment = () => {
-
-// }
+const colorGrade = (seg) => {
+  let gradient = document.querySelector('.gradient')
+  const gradeMath = ((seg.segGrade + 4) / 19) * 100
+  gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
+    (100 - gradeMath) * 2.2
+  },0) `
+  gradient.classList.remove('gradient')
+}
 
 const getLoggedInAthleteStarredSegments = (res) => {
   let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${res.access_token}`
@@ -102,28 +143,24 @@ const getLoggedInAthleteStarredSegments = (res) => {
         response.data[i].pr_time
       )
       segmentArray.push(segment)
-      console.log(segmentArray)
-
-      getAllButton.addEventListener('click', () => {
-        const listItem = document.createElement('tr')
-        listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
-        <td>${segmentArray[i].segDistance} mi</td>
-        <td class='gradient'>${segmentArray[i].segGrade} % </td>
-        <td>${segmentArray[i].segClimbCat}</td>
-        <td>${segmentArray[i].segPrTime}</td>`
-
-        segmentList.append(listItem)
-
-        let gradient = document.querySelector('.gradient')
-        const gradeMath = ((segmentArray[i].segGrade + 4) / 19) * 100
-        gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
-          (100 - gradeMath) * 2.2
-        },0) `
-        gradient.classList.remove('gradient')
-      })
     }
   })
 }
+
+getAllButton.addEventListener('click', () => {
+  for (i = 0; i < segmentArray.length; i++) {
+    const listItem = document.createElement('tr')
+    listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
+  <td>${segmentArray[i].segDistance} mi</td>
+  <td class='gradient'>${segmentArray[i].segGrade} % </td>
+  <td>${segmentArray[i].segClimbCat}</td>
+  <td>${segmentArray[i].segPrTime}</td>`
+
+    segmentList.append(listItem)
+
+    colorGrade(segmentArray[i])
+  }
+})
 
 searchButton.addEventListener('click', () => {
   let userInput = inputBar.value
@@ -138,15 +175,23 @@ searchButton.addEventListener('click', () => {
         <td>${segmentArray[i].segPrTime}</td>`
 
       segmentList.append(listItem)
-
-      let gradient = document.querySelector('.gradient')
-      const gradeMath = ((segmentArray[i].segGrade + 4) / 19) * 100
-      gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
-        (100 - gradeMath) * 2.2
-      },0) `
-      gradient.classList.remove('gradient')
+      colorGrade(segmentArray[i])
     }
   }
+})
+
+randomButton.addEventListener('click', () => {
+  let randomSegment = Math.floor(Math.random() * segmentArray.length)
+  const listItem = document.createElement('tr')
+  listItem.innerHTML = `<td>${segmentArray[randomSegment].segName}</td>
+        <td>${segmentArray[randomSegment].segDistance} mi</td>
+        <td class='gradient'>${segmentArray[randomSegment].segGrade} % </td>
+        <td>${segmentArray[randomSegment].segClimbCat}</td>
+        <td>${segmentArray[randomSegment].segPrTime}</td>`
+
+  segmentList.append(listItem)
+
+  colorGrade(segmentArray[randomSegment])
 })
 
 //functionality for user logins so I don't have to repeatedly refresh access code. Huge thanks to everyone online with OAuth tutorials for helping me parse this out!
