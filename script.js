@@ -35,6 +35,11 @@ const timeToReadable = (time) => {
   }
 }
 
+let AWFULARRAY = [
+  5, 60, 115, 180, 241, 300, 361, 422, 483, 544, 605, 665, 726, 787, 848, 909,
+  970, 1030, 1092, 1157, 1200
+]
+
 //create 'onclick' for calculate power curve button
 const calcPowerChart = () => {
   // let yValues = [
@@ -82,7 +87,7 @@ const calcPowerChart = () => {
   }
   yValues.push({ x: 300, y: pwr5Min.value })
 
-  for (let k = 0.009; k < 1; k += 0.009) {
+  for (let k = 0.00564; k < 1; k += 0.00564) {
     yValues.push(interp3To12(k))
   }
   yValues.push({ x: 1200, y: pwr20Min.value })
@@ -91,19 +96,16 @@ const calcPowerChart = () => {
   new Chart('pwr-graph', {
     type: 'line',
     data: {
-      labels: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13],
+      labels: yValues,
       datasets: [
         {
           data: yValues,
-          pointRadius: 3,
-          pointBackgroundColor: 'rgba(249, 234, 224,1)',
-          borderColor: 'rgba(81, 123, 159,1)',
-          fill: false
+          fill: true,
+          backgroundColor: 'rgba(249, 234, 224,1)',
+          borderColor: `rgb(41, 62, 79)`,
+          pointSize: 0
         }
       ]
-    },
-    options: {
-      maintainAspectRatio: false
     }
   })
 }
@@ -174,7 +176,7 @@ searchButton.addEventListener('click', () => {
         <td>${segmentArray[i].segClimbCat}</td>
         <td>${segmentArray[i].segPrTime}</td>`
 
-      segmentList.append(listItem)
+      segmentList.prepend(listItem)
       colorGrade(segmentArray[i])
     }
   }
@@ -189,7 +191,7 @@ randomButton.addEventListener('click', () => {
         <td>${segmentArray[randomSegment].segClimbCat}</td>
         <td>${segmentArray[randomSegment].segPrTime}</td>`
 
-  segmentList.append(listItem)
+  segmentList.prepend(listItem)
 
   colorGrade(segmentArray[randomSegment])
 })

@@ -38,7 +38,7 @@ ul {
 }
 
 
-.search-section {
+.search-section, #load {
     margin: 45px;
 }
 
@@ -71,4 +71,29 @@ a {
 h1 {
     color: rgb(249, 234, 224);
     background-color: rgb(81, 123, 159);
+}
+
+button {
+    display: inline-block;
+    padding: .75rem ;
+    border-radius: 0.3rem;
+    color: rgb(81, 123, 159);
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: rgb(234, 165, 137);
+}
+
+input {
+    border-radius: 0.3rem;
+    display: inline-block;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    padding: .60rem ;
 }
