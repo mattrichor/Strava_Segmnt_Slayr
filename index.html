@@ -29,9 +29,15 @@
     </div>
 </div>
 
+<div>
+    <button id="load">Load Starred Segments</button>
+</div>
+
 <div class="search-section">  
         <input type="text" id="search-input" placeholder="Segment Name" />
-        <button id="search">Send it!</button>
+        <button id="nameSearch">Search By Name</button>
+        <button id="random">Random Segment</button>
+        <button id="search">Send It! (All Starred Segments)</button>
         
 </div> 
     
@@ -45,7 +51,7 @@
         <th class='sortable'onclick="sortSegments(1)">Distance</th>
         <th class='sortable'onclick="sortSegments(2)">Gradient</th>
         <th class='sortable'onclick="sortSegments(3)">Climb Category</th>
-        <th class='sortable'onclick="sortSegments(4)">PR Time</th>
+        <th class='sortable'>PR Time</th>
         
     </tr></thead>
     <tbody class="segment-list">

@@ -34,7 +34,7 @@ link here: (https://trello.com/b/ofKTtual/segmnt-slayr)
 - [X] API Call Segment List
 - [ ] Segment List Sorting
 - [X] Input Forms for Power Zones
-- [ ] Power Zones Graph
+- [X] Power Zones Graph
 - [ ] Estimated Time on Segment
 
 ***

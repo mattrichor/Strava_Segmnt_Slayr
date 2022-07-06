@@ -7,8 +7,11 @@ const clientId = `89151`
 let segmentList = document.querySelector('.segment-list')
 
 const inputBar = document.getElementById('search-input')
-const searchButton = document.getElementById('search')
+const getAllButton = document.getElementById('search')
 const powerButton = document.getElementById('calculate-curve')
+const searchButton = document.getElementById('nameSearch')
+const randomButton = document.getElementById('random')
+const loadAllButton = document.getElementById('load')
 
 const pwr5Sec = document.getElementById('5sec')
 const pwr1Min = document.getElementById('1min')
@@ -73,11 +76,22 @@ class Segment {
   }
 }
 
+// const getPokeApi = () => {
+//   let input = inputBar.value
+//   axios.get(starredSegmentsLink + input).then((response) => {
+//     displaySegment(response)
+//   })
+// }
+// searchButton
+//   let userInput = inputBar.value
+// displaySegment = () => {
+
+// }
+
 const getLoggedInAthleteStarredSegments = (res) => {
   let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${res.access_token}`
 
-  searchButton.addEventListener('click', async () => {
-    let userInput = inputBar.value
+  loadAllButton.addEventListener('click', async () => {
     const response = await axios.get(starredSegmentsLink)
     for (let i = 0; i < response.data.length; i++) {
       let segment = new Segment(
@@ -88,24 +102,52 @@ const getLoggedInAthleteStarredSegments = (res) => {
         response.data[i].pr_time
       )
       segmentArray.push(segment)
+      console.log(segmentArray)
 
+      getAllButton.addEventListener('click', () => {
+        const listItem = document.createElement('tr')
+        listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
+        <td>${segmentArray[i].segDistance} mi</td>
+        <td class='gradient'>${segmentArray[i].segGrade} % </td>
+        <td>${segmentArray[i].segClimbCat}</td>
+        <td>${segmentArray[i].segPrTime}</td>`
+
+        segmentList.append(listItem)
+
+        let gradient = document.querySelector('.gradient')
+        const gradeMath = ((segmentArray[i].segGrade + 4) / 19) * 100
+        gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
+          (100 - gradeMath) * 2.2
+        },0) `
+        gradient.classList.remove('gradient')
+      })
+    }
+  })
+}
+
+searchButton.addEventListener('click', () => {
+  let userInput = inputBar.value
+  for (i = 0; i < segmentArray.length; i++) {
+    if (segmentArray[i].segName.includes(userInput)) {
+      console.log(segmentArray[i].segName)
       const listItem = document.createElement('tr')
-      listItem.innerHTML = `<td>${segment.segName}</td>
-        <td>${segment.segDistance} mi</td>
-        <td class='gradient'>${segment.segGrade} % </td>
-        <td>${segment.segClimbCat}</td>
-        <td>${segment.segPrTime}</td>`
+      listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
+        <td>${segmentArray[i].segDistance} mi</td>
+        <td class='gradient'>${segmentArray[i].segGrade} % </td>
+        <td>${segmentArray[i].segClimbCat}</td>
+        <td>${segmentArray[i].segPrTime}</td>`
 
       segmentList.append(listItem)
+
       let gradient = document.querySelector('.gradient')
-      const gradeMath = ((segment.segGrade + 4) / 19) * 100
+      const gradeMath = ((segmentArray[i].segGrade + 4) / 19) * 100
       gradient.style.backgroundColor = `rgb(${gradeMath * 2.2}, ${
         (100 - gradeMath) * 2.2
       },0) `
       gradient.classList.remove('gradient')
     }
-  })
-}
+  }
+})
 
 //functionality for user logins so I don't have to repeatedly refresh access code. Huge thanks to everyone online with OAuth tutorials for helping me parse this out!
 const authLink = 'https://www.strava.com/oauth/token'
@@ -158,8 +200,7 @@ function sortSegments(j) {
       if (direction == 'ascending') {
         if (
           parseFloat(x.innerText.toLowerCase()) >
-            parseFloat(y.innerText.toLowerCase()) ||
-          x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
+          parseFloat(y.innerText.toLowerCase())
         ) {
           shouldSwitch = true
           break
@@ -167,8 +208,7 @@ function sortSegments(j) {
       } else if (direction == 'descending') {
         if (
           parseFloat(x.innerText.toLowerCase()) <
-            parseFloat(y.innerText.toLowerCase()) ||
-          x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
+          parseFloat(y.innerText.toLowerCase())
         ) {
           shouldSwitch = true
           break
