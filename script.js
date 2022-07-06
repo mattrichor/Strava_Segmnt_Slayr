@@ -152,16 +152,24 @@ function sortSegments(j) {
 
       let x = rows[i].getElementsByTagName('td')[j]
       let y = rows[i + 1].getElementsByTagName('td')[j]
+      let intX = parseFloat(x)
+      let intY = parseFloat(y)
+
       if (direction == 'ascending') {
         if (
-          x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() ||
-          Number(x.innerHTML) > Number(y.innerHTML)
+          parseFloat(x.innerText.toLowerCase()) >
+            parseFloat(y.innerText.toLowerCase()) ||
+          x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
         ) {
           shouldSwitch = true
           break
         }
       } else if (direction == 'descending') {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        if (
+          parseFloat(x.innerText.toLowerCase()) <
+            parseFloat(y.innerText.toLowerCase()) ||
+          x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
+        ) {
           shouldSwitch = true
           break
         }
