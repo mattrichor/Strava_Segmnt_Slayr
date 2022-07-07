@@ -9,6 +9,8 @@ body {
     background-color: rgb(212, 121, 85);
     background-image: linear-gradient(rgb(212, 121, 85),#542505);
     background-repeat: no-repeat;
+    font-size: 1rem;
+    letter-spacing: .1rem;
 }
 
 ul {
@@ -27,14 +29,32 @@ ul {
     max-height: 300px;
 }
 
+button {
+    display: inline-block;
+    padding: .75rem ;
+    border-radius: 0.3rem;
+    color: rgb(81, 123, 159);
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+}
+
 .container {
     display: grid;
-    grid-template-columns: 40fr 1fr 40fr;
+    grid-template-columns: 1fr 1fr 1fr;
 
+}
+canvas {
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 .power-inputs {
-    
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
 
@@ -44,7 +64,7 @@ ul {
 
 table, td {
     table-layout: fixed;
-    width: 83%;
+    width: 75%;
     border-collapse: collapse;
     border: 3px solid rgb(25, 21, 25);
     margin-left: auto;
@@ -73,18 +93,7 @@ h1 {
     background-color: rgb(81, 123, 159);
 }
 
-button {
-    display: inline-block;
-    padding: .75rem ;
-    border-radius: 0.3rem;
-    color: rgb(81, 123, 159);
-    text-transform: uppercase;
-    font-size: 1rem;
-    letter-spacing: .15rem;
-    transition: all .3s;
-    position: relative;
-    overflow: hidden;
-}
+
 
 button:hover {
     background-color: rgb(234, 165, 137);
@@ -97,3 +106,31 @@ input {
     letter-spacing: .15rem;
     padding: .60rem ;
 }
+
+#loadProgress {
+    width: 100%;
+    border-radius: 0.3rem;
+    max-width: 50%;
+    display: block;
+    left: 0;
+    right: 0;
+    margin-left:auto;
+    margin-right: auto;
+    bottom: 3%;
+  }
+  
+  #loadBar {
+    width: 1%;
+    height: 30px;
+    background-color: rgb(180, 0, 0);
+    border-radius: 0.3rem;
+    max-width: 50%;
+    display: block;
+    left: 0;
+    right: 0;
+    margin-left:auto;
+    margin-right: auto;
+    position:absolute;
+  }
+
+  

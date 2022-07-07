@@ -18,6 +18,8 @@ const pwr1Min = document.getElementById('1min')
 const pwr5Min = document.getElementById('5min')
 const pwr20Min = document.getElementById('20min')
 
+const loadProgress = document.getElementById('loadProgress')
+
 const segmentArray = []
 
 const timeToReadable = (time) => {
@@ -34,83 +36,6 @@ const timeToReadable = (time) => {
     )
   }
 }
-
-let AWFULARRAY = [
-  5, 60, 115, 180, 241, 300, 361, 422, 483, 544, 605, 665, 726, 787, 848, 909,
-  970, 1030, 1092, 1157, 1200
-]
-
-//create 'onclick' for calculate power curve button
-const calcPowerChart = () => {
-  // let yValues = [
-  //   { x: 5, y: pwr5Sec.value },
-  //   { x: 60, y: pwr1Min.value },
-
-  // ]
-
-  // let i = 0.083
-
-  let yValues = [{ x: 5, y: pwr5Sec.value }]
-  let i = 0
-  const interp5To60 = (num) => {
-    let interp = d3.interpolate(
-      { x: 5, y: pwr5Sec.value },
-      { x: 60, y: pwr1Min.value }
-    )
-    return interp(num)
-  }
-
-  const interp60To300 = (num) => {
-    let interp = d3.interpolate(
-      { x: 60, y: pwr1Min.value },
-      { x: 300, y: pwr5Min.value }
-    )
-    return interp(num)
-  }
-
-  const interp3To12 = (num) => {
-    let interp = d3.interpolate(
-      { x: 300, y: pwr5Min.value },
-      { x: 1200, y: pwr20Min.value }
-    )
-    return interp(num)
-  }
-
-  // function for interpolating 5 secs to 1 min
-  for (i = 0.083; i < 1; i += 0.083) {
-    yValues.push(interp5To60(i))
-  }
-  yValues.push({ x: 60, y: pwr1Min.value })
-
-  for (let j = 0.021; j < 1; j += 0.021) {
-    yValues.push(interp60To300(j))
-  }
-  yValues.push({ x: 300, y: pwr5Min.value })
-
-  for (let k = 0.00564; k < 1; k += 0.00564) {
-    yValues.push(interp3To12(k))
-  }
-  yValues.push({ x: 1200, y: pwr20Min.value })
-  console.log(yValues)
-  //   console.log(xyValues)
-  new Chart('pwr-graph', {
-    type: 'line',
-    data: {
-      labels: yValues,
-      datasets: [
-        {
-          data: yValues,
-          fill: true,
-          backgroundColor: 'rgba(249, 234, 224,1)',
-          borderColor: `rgb(41, 62, 79)`,
-          pointSize: 0
-        }
-      ]
-    }
-  })
-}
-
-powerButton.addEventListener('click', calcPowerChart)
 
 class Segment {
   constructor(segName, segDistance, segGrade, segClimbCat, segPrTime) {
@@ -131,10 +56,19 @@ const colorGrade = (seg) => {
   gradient.classList.remove('gradient')
 }
 
+const loadBarGrade = (width) => {
+  const gradeMath = width * 2
+  let barGrade = document.getElementById('loadBar')
+  barGrade.style.backgroundColor = `rgb(${gradeMath + 190 - gradeMath * 2.2}, ${
+    gradeMath * 1.3
+  },0) `
+}
+
 const getLoggedInAthleteStarredSegments = (res) => {
   let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${res.access_token}`
 
   loadAllButton.addEventListener('click', async () => {
+    moveLoadBar()
     const response = await axios.get(starredSegmentsLink)
     for (let i = 0; i < response.data.length; i++) {
       let segment = new Segment(
@@ -149,7 +83,57 @@ const getLoggedInAthleteStarredSegments = (res) => {
   })
 }
 
+let l = 0
+const moveLoadBar = () => {
+  if (l == 0) {
+    l = 1
+    let barGrade = document.getElementById('loadBar')
+    let width = 0.5
+    let id = setInterval(frame, 10)
+    function frame() {
+      if (width >= 50) {
+        clearInterval(id)
+        l = 0
+        loadBarGrade(width)
+        loadProgress.innerHTML = 'Segments Loaded!'
+      } else if (width <= 10) {
+        width = width + 0.1
+        loadProgress.innerHTML = 'Getting Segments...'
+        barGrade.style.width = width + '%'
+        loadBarGrade(width)
+      } else if (width <= 20 && width >= 10) {
+        width = width + 0.1
+        loadProgress.innerHTML = 'Still Gettin em....'
+        barGrade.style.width = width + '%'
+        loadBarGrade(width)
+      } else if (width <= 30 && width >= 20) {
+        width = width + 0.1
+        loadProgress.innerHTML =
+          'So you really tell your friends this is your FTP, huh?'
+        barGrade.style.width = width + '%'
+        loadBarGrade(width)
+      } else if (width <= 38 && width >= 30) {
+        width = width + 0.1
+        loadProgress.innerHTML = 'Calculating meaning of the universe...'
+        barGrade.style.width = width + '%'
+        loadBarGrade(width)
+      } else if (width <= 50 && width >= 38) {
+        width = width + 0.1
+        loadProgress.innerHTML =
+          'Yea, we got your segments already but we heard yall like long loading bars'
+        barGrade.style.width = width + '%'
+        loadBarGrade(width)
+      }
+    }
+  }
+}
+
+const clearSegs = () => {
+  segmentList.innerText = ''
+}
+
 getAllButton.addEventListener('click', () => {
+  clearSegs()
   for (i = 0; i < segmentArray.length; i++) {
     const listItem = document.createElement('tr')
     listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
@@ -165,6 +149,7 @@ getAllButton.addEventListener('click', () => {
 })
 
 searchButton.addEventListener('click', () => {
+  clearSegs()
   let userInput = inputBar.value
   for (i = 0; i < segmentArray.length; i++) {
     if (segmentArray[i].segName.includes(userInput)) {
@@ -183,6 +168,7 @@ searchButton.addEventListener('click', () => {
 })
 
 randomButton.addEventListener('click', () => {
+  clearSegs()
   let randomSegment = Math.floor(Math.random() * segmentArray.length)
   const listItem = document.createElement('tr')
   listItem.innerHTML = `<td>${segmentArray[randomSegment].segName}</td>
