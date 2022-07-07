@@ -10,6 +10,9 @@
     <script defer src="script.js" charset="utf-8"></script>
     <script defer src="power.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;1,100&family=League+Gothic&family=Orbitron&family=Press+Start+2P&family=Smooch&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -52,15 +55,15 @@
 
 <!-- Segment Display Section  -->
 <table id="table">
-    <thead>
+    
     <tr class="table-top">
         <th class='sortable'onclick="sortSegments(0)">Name</th>
-        <th class='sortable'onclick="sortSegments(1)">Distance</th>
-        <th class='sortable'onclick="sortSegments(2)">Gradient</th>
-        <th class='sortable'onclick="sortSegments(3)">Climb Category</th>
-        <th class='sortable'>PR Time</th>
+        <th class='sortable'onclick="sortSegmentsNum(1)">Distance</th>
+        <th class='sortable'onclick="sortSegmentsNum(2)">Gradient</th>
+        <th class='sortable'onclick="sortSegmentsNum(3)">Climb Category</th>
+        <th class='sortable'onclick="sortSegments(4)">PR Time</th>
         
-    </tr></thead>
+    </tr>
     <tbody class="segment-list">
     <!-- segment list items will display here -->
     </tbody>

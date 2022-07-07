@@ -10,13 +10,13 @@ html {
 }
 body {
     text-align: center;
-    
-    background-image: linear-gradient(rgb(212, 121, 85),#542505);
+    font-family: 'Orbitron', sans-serif;
+    background-image: linear-gradient(rgb(225, 118, 75),#98440c);
     background-repeat: no-repeat;
     background: cover;
-    
+    text-shadow: #542505;
     font-size: 1rem;
-    letter-spacing: .1rem;
+    letter-spacing: .06rem;
     height: 100%;
     margin: 0;
     background-attachment: fixed;
@@ -45,16 +45,17 @@ button {
     background-color: rgb(81, 123, 159);
     color: rgb(249, 234, 224);;
     text-transform: uppercase;
-    font-size: 1rem;
-    letter-spacing: .15rem;
+    font-size: 1.2rem;
+    letter-spacing: .1rem;
     transition: all .3s;
     position: relative;
     overflow: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
 
 }
 canvas {
@@ -67,35 +68,47 @@ img {
     position: absolute;
     margin-left: 10px;
     margin-top: 10px;
+    display: block;
 }
 
 .power-inputs {
     grid-column-start: 3;
     grid-column-end: 4;
+    margin-right: -6%;
 }
 
 
-.search-section, #load {
+.search-section {
     margin: 45px;
+}
+
+#load {
+    margin-bottom: 15px;
 }
 
 table, td {
     table-layout: fixed;
     width: 75%;
     border-collapse: collapse;
-    border: 3px solid rgb(25, 21, 25);
+    /* border: 3px solid rgb(25, 21, 25); */
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(215, 208, 203);
+    letter-spacing: 0rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    /* border-radius: 0.2rem; */
 }
 
+
 th {
-    border: 1px solid rgb(41, 62, 79);
+    border: 1.6px solid rgb(41, 62, 79);
 }
 
 .table-top {
     background-color: rgb(81, 123, 159);
     color: rgb(249, 234, 224);
+
 }
 
 .gradient {
@@ -121,7 +134,7 @@ input {
     display: inline-block;
     font-size: 1rem;
     letter-spacing: .15rem;
-    padding: .60rem ;
+    padding: .40rem ;
 }
 
 #loadProgress {
@@ -166,3 +179,20 @@ input {
   #fakeButton:hover {
     background-color: rgb(234, 165, 137);
 }
+
+#nameSearch, #random, #search, #calculate-curve{
+    font-size: 1.0rem;
+    padding: 0.5rem;
+    margin-top: 5px;
+}
+
+#reset {
+    margin-bottom: -45;
+    font-size: 15px;
+    border-radius: 0.2rem;
+    padding: 0.6rem;
+}
+
+tr:nth-child(even) {background-color: #e9dede;}
+
+input ()

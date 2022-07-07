@@ -2,8 +2,12 @@
 
 let xValues = []
 let yValues = []
-
+let pwrChart
 //create 'onclick' for calculate power curve button
+new Chart('pwr-graph', {
+  type: 'line'
+})
+
 const calcPowerChart = () => {
   image.style.opacity = '0'
 
@@ -54,7 +58,7 @@ const calcPowerChart = () => {
     xValues.push(yValues[n].x)
   }
 
-  new Chart('pwr-graph', {
+  let pwrChart = new Chart('pwr-graph', {
     type: 'line',
     data: {
       labels: xValues,
@@ -88,10 +92,16 @@ const resetZones = () => {
   pwr5Min.value = ''
   pwr20Min.value = ''
   powerButton.addEventListener('click', calcPowerChart)
+  image.style.opacity = '1'
+  image.style.display = 'block'
+  new Chart('pwr-graph', {
+    type: 'line'
+  })
 }
 
 let image = document.getElementById('img')
 let resetBtn = document.getElementById('reset')
+let canvas = document.getElementById('pwr-graph')
 
 resetBtn.addEventListener('click', resetZones)
 powerButton.addEventListener('click', calcPowerChart)
