@@ -14,10 +14,12 @@
 </head>
 <body>
 <h1>Strava Segmnt Slayr</h1>
-<div class="container"> 
+<div class="container" > 
     <!-- power zones graph -->
     <div class="empty"></div>
-    <canvas id="pwr-graph"> </canvas>
+    <div id="graph">
+        <img id="img" src="Graph-backing-2.png">
+        <canvas id="pwr-graph"> </canvas></div>
     <div class="power-inputs">
         <ul>
         <li><input type="number" id="5sec" placeholder="5 Sec Power" /></li>
@@ -27,6 +29,7 @@
         <li><input type="number" id="weight" placeholder="Your Weight (lb)" /></li>
         <li><input type="number" id="bike-weight" placeholder="Bike Weight (lb)" /></li>
         <li><button id="calculate-curve"> Calculate Power Curve</button></li>
+        <li><button id="reset">Reset</button></li>
     </ul>
     </div>
 </div>

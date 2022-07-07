@@ -13,10 +13,10 @@ const searchButton = document.getElementById('nameSearch')
 const randomButton = document.getElementById('random')
 const loadAllButton = document.getElementById('load')
 
-const pwr5Sec = document.getElementById('5sec')
-const pwr1Min = document.getElementById('1min')
-const pwr5Min = document.getElementById('5min')
-const pwr20Min = document.getElementById('20min')
+let pwr5Sec = document.getElementById('5sec')
+let pwr1Min = document.getElementById('1min')
+let pwr5Min = document.getElementById('5min')
+let pwr20Min = document.getElementById('20min')
 
 const loadProgress = document.getElementById('loadProgress')
 
@@ -108,8 +108,7 @@ const moveLoadBar = () => {
         loadBarGrade(width)
       } else if (width <= 30 && width >= 20) {
         width = width + 0.1
-        loadProgress.innerHTML =
-          'So you really tell your friends this is your FTP, huh?'
+        loadProgress.innerHTML = '...is that really your FTP?'
         barGrade.style.width = width + '%'
         loadBarGrade(width)
       } else if (width <= 38 && width >= 30) {

@@ -1,13 +1,12 @@
 //* logic for the graph computation & segment time analysis */
 
-let AWFULARRAY = [
-  5, 60, 115, 180, 241, 300, 361, 422, 483, 544, 605, 665, 726, 787, 848, 909,
-  970, 1030, 1092, 1157, 1200
-]
-
+let xValues = []
 let yValues = []
+
 //create 'onclick' for calculate power curve button
 const calcPowerChart = () => {
+  image.style.opacity = '0'
+
   let yValues = [{ x: 5, y: pwr5Sec.value }]
   let i = 0
   const interp5To60 = (num) => {
@@ -49,30 +48,52 @@ const calcPowerChart = () => {
     yValues.push(interp3To12(k))
   }
   yValues.push({ x: 1200, y: pwr20Min.value })
-  console.log(yValues)
-  //   console.log(xyValues)
+  for (let n = 0; n < yValues.length; n++) {
+    yValues[n].y = parseInt(yValues[n].y)
+    yValues[n].x = parseInt(yValues[n].x)
+    xValues.push(yValues[n].x)
+  }
+
   new Chart('pwr-graph', {
     type: 'line',
     data: {
-      labels: yValues,
+      labels: xValues,
       datasets: [
         {
           data: yValues,
           fill: true,
-          backgroundColor: 'rgba(249, 234, 224,1)',
-          borderColor: `rgb(41, 62, 79)`,
-          pointSize: 0
+          backgroundColor: 'rgb(81, 123, 159)',
+          borderColor: 'black',
+          pointRadius: 0,
+          display: true
         }
-      ]
+      ],
+      options: {
+        scales: {
+          labels: false
+        }
+      }
     }
   })
-  for (let n = 0; n < yValues.length; n++) {
-    yValues[n].y = parseInt(yValues[n].y)
-    yValues[n].x = parseInt(yValues[n].x)
-  }
+
   console.log(yValues)
 }
 
+const resetZones = () => {
+  yValues = []
+  xValues = []
+  i = 0
+  pwr5Sec.value = ''
+  pwr1Min.value = ''
+  pwr5Min.value = ''
+  pwr20Min.value = ''
+  powerButton.addEventListener('click', calcPowerChart)
+}
+
+let image = document.getElementById('img')
+let resetBtn = document.getElementById('reset')
+
+resetBtn.addEventListener('click', resetZones)
 powerButton.addEventListener('click', calcPowerChart)
 
 //Maths!
