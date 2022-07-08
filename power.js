@@ -6,7 +6,13 @@ let canvas = document.getElementById('pwr-graph')
 let riderWeight = document.getElementById('weight')
 let bikeWeight = document.getElementById('bike-weight')
 
-let sysWeight = riderWeight + bikeWeight
+// let sysWeight = 158 * 0.453592
+let rollingRes = 0.005
+
+let aeroValues = [0.388, 0.42, 0.3]
+let airDensity = 1.2225
+let A2 = 0.5 * aeroValues[0] * airDensity
+
 let xValues = []
 let yValues = []
 let pwrChart
@@ -104,47 +110,18 @@ const resetZones = () => {
   new Chart('pwr-graph', {
     type: 'line'
   })
+  pwrDisplay.innerHTML = `Power Needed:`
+  slayrName.innerHTML = 'Name:'
 }
 
 //Maths!
 
-let aeroValues = [0.388, 0.42, 0.3] //resistance from: hoods, tops, drops
+//resistance from: hoods, tops, drops
 
 //find force from
 
 let frontalArea = 0.388 // meters^2
-let airDensity = 1.2225 //kg/m^3
-
-// let force =
-// let force =
-// (aeroValues[1] / 2) * airDensity * frontalArea * (velocity * velocity)
-// let rollingRes = 0.005
-// let totalRes = mass * ((8.1 * 0.01) + rollingRes)
-let meterDis = 3.12 * 1609.34
-// let velocity = meterDis / timeEstimate.value
-// let powerNeeded = (force * velocity)
-
-//NEED ROLLING RESISTANCE WITH RESPECT FOR AIR DENSITY AND FRONTAL AREA AND AERO
-
-let calcWattsBtn = document.getElementById('est-watts')
-let timeEstimate = document.getElementById('time-guess')
-
-const calcWatts = () => {
-  let sysWeight = 158 * 0.453592
-  let rollingRes = 0.005
-  let A2 = 0.5 * 0.388 * airDensity //aeroValues
-
-  let meterDis = 3.12 * 1609.34
-  let totalWeight = 9.8 * sysWeight
-  let gradeV = 8.1 * 0.01
-  let totalRes = totalWeight * (gradeV + rollingRes)
-
-  let velocity = meterDis / 1320
-  let powerNeeded =
-    (velocity * totalRes + velocity * velocity * velocity * A2) / 0.95
-
-  console.log(powerNeeded)
-}
+//kg/m^3
 
 // powerv = (v * tres + v * tv * tv * A2Eff) / transv
 // tres = twt * (gradev + rollingRes)
@@ -152,8 +129,35 @@ const calcWatts = () => {
 
 // let mass = 8.1 * sysWeight * 0.453592
 
-calcWatts()
+let slayrMenu = document.getElementById('slayr-menu')
+let timeEstimate = document.getElementById('time-guess')
+let calcWattsBtn = document.getElementById('est-watts')
+let pwrDisplay = document.getElementById('pwr-needed')
+let slayrName = document.getElementById('slayr-name')
+
+slayrMenu.style.opacity = 0
+slayrMenu.style.backgroundColor = 'rgba ,,,0'
 
 resetBtn.addEventListener('click', resetZones)
 powerButton.addEventListener('click', calcPowerChart)
-calcWattsBtn.addEventListener('click', calcWatts)
+
+const showWattsMenu = (i) => {
+  slayrMenu.style.opacity = 1
+  slayrName.innerHTML += ` <br>${segmentArray[i].segName}`
+  const calculateWatts = () => {
+    let powerNeeded = 0
+    let sysWeight =
+      (parseInt(bikeWeight.value) + parseInt(riderWeight.value)) * 0.453592
+    console.log(segmentArray[i].segDistance)
+    console.log(segmentArray[i])
+    let meterDis = segmentArray[i].segDistance * 1609.34
+    let totalWeight = 9.8 * sysWeight
+    let gradeV = segmentArray[i].segGrade * 0.01
+    let totalRes = totalWeight * (gradeV + rollingRes)
+    let velocity = meterDis / timeEstimate.value
+    powerNeeded =
+      (velocity * totalRes + velocity * velocity * velocity * A2) / 0.95
+    pwrDisplay.innerHTML += ` <br>${powerNeeded.toFixed(0)} Watts`
+  }
+  calcWattsBtn.addEventListener('click', calculateWatts)
+}

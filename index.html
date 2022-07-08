@@ -54,8 +54,17 @@
 </div>
 
 <!-- Segment Display Section  -->
-<table id="table">
-    
+
+    <table class="slayr">
+        <tr id="slayr-menu">
+        <td>SEGMNT SLAYR</td>
+        <td id="slayr-name">Name: </td>
+        <td class="estimate"> <input type="number" id="time-guess" placeholder="Estimated Time" /></td>
+        <td><button id="est-watts"> ESTIMATE WATTS</button></td>
+        <td id="pwr-needed">Power Needed:</td>
+
+    </tr></table>
+    <table id="table">
     <tr class="table-top">
         <th class='sortable'onclick="sortSegments(0)">Name</th>
         <th class='sortable'onclick="sortSegmentsNum(1)">Distance</th>
@@ -69,8 +78,8 @@
     </tbody>
 </table>
 <div class="estimate">
-    <input type="number" id="time-guess" placeholder="Estimated Time" />
-    <button id="est-watts"> ESTIMATE WATTS</button> 
+   
+    
 
 </div>
 </body>

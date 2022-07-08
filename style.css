@@ -193,6 +193,27 @@ input {
     padding: 0.6rem;
 }
 
-tr:nth-child(even) {background-color: #e9dede;}
+.slayr {
+    font-size: 5px;
+    margin-top: -40px;
+    background-color: rgba(249, 234, 224, 0);
+}
 
-input ()
+#est-watts {
+    background-color: #557481;
+    padding: 0.1rem;
+    font-size: 1.2rem;
+    
+}
+#est-watts:hover {
+    background-color: rgb(173, 111, 87);
+}
+
+#time-guess {
+    font-size: 0.8rem;
+    letter-spacing: .12rem;
+}
+
+.hover:hover {
+    background-color: #557481;
+}

@@ -26,12 +26,12 @@ const timeToReadable = (time) => {
   if (time == undefined) {
     return 'No Segment Efforts'
   } else {
-    let min = Math.floor(Math.abs(time))
+    let min = Math.floor(time / 60)
     let sec = Math.floor(Math.abs(time) % 60)
     return (
-      (min < 10 ? '0' : '') +
-      `${(min / 60).toFixed(0)} min ` +
-      (sec < 10 ? '0' : '') +
+      (min < 10 ? 0 : '') +
+      `${min.toFixed(0)} min ` +
+      (sec < 10 ? 0 : '') +
       `${sec} sec`
     )
   }
@@ -40,7 +40,7 @@ const timeToReadable = (time) => {
 class Segment {
   constructor(segName, segDistance, segGrade, segClimbCat, segPrTime) {
     this.segName = segName
-    this.segDistance = (segDistance * 0.000621371).toFixed(2)
+    this.segDistance = segDistance * 0.00062
     this.segGrade = segGrade
     this.segClimbCat = segClimbCat
     this.segPrTime = timeToReadable(segPrTime)
@@ -87,15 +87,19 @@ getAllButton.addEventListener('click', () => {
   clearSegs()
   for (i = 0; i < segmentArray.length; i++) {
     const listItem = document.createElement('tr')
-    listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
-  <td>${segmentArray[i].segDistance} mi</td>
-  <td class='gradient'>${segmentArray[i].segGrade} % </td>
+    listItem.innerHTML = `<td class='hover' onclick='showWattsMenu(${i})'>${
+      segmentArray[i].segName
+    }</td>
+  <td id='dist${[i]}'>${segmentArray[i].segDistance.toFixed(2)} mi</td>
+  <td class='gradient' id='grade${[i]}'>${segmentArray[i].segGrade} % </td>
   <td>${segmentArray[i].segClimbCat}</td>
   <td>${segmentArray[i].segPrTime}</td>`
 
     segmentList.append(listItem)
-
+    // let gradientforMath = document.querySelector('.gradient')
     colorGrade(segmentArray[i])
+
+    console.log(segmentArray[i])
   }
 })
 
@@ -106,8 +110,10 @@ searchButton.addEventListener('click', () => {
     if (segmentArray[i].segName.includes(userInput)) {
       console.log(segmentArray[i].segName)
       const listItem = document.createElement('tr')
-      listItem.innerHTML = `<td>${segmentArray[i].segName}</td>
-        <td>${segmentArray[i].segDistance} mi</td>
+      listItem.innerHTML = `<td class='hover' onclick='showWattsMenu(${i})'>${
+        segmentArray[i].segName
+      }</td>
+        <td>${segmentArray[i].segDistance.toFixed(2)} mi</td>
         <td class='gradient'>${segmentArray[i].segGrade} % </td>
         <td>${segmentArray[i].segClimbCat}</td>
         <td>${segmentArray[i].segPrTime}</td>`
@@ -122,8 +128,10 @@ randomButton.addEventListener('click', () => {
   clearSegs()
   let randomSegment = Math.floor(Math.random() * segmentArray.length)
   const listItem = document.createElement('tr')
-  listItem.innerHTML = `<td>${segmentArray[randomSegment].segName}</td>
-        <td>${segmentArray[randomSegment].segDistance} mi</td>
+  listItem.innerHTML = `<td class='hover' onclick='showWattsMenu(${randomSegment})'>${
+    segmentArray[randomSegment].segName
+  }</td>
+        <td>${segmentArray[randomSegment].segDistance.toFixed(2)} mi</td>
         <td class='gradient'>${segmentArray[randomSegment].segGrade} % </td>
         <td>${segmentArray[randomSegment].segClimbCat}</td>
         <td>${segmentArray[randomSegment].segPrTime}</td>`
