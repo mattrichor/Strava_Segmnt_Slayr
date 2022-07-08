@@ -71,6 +71,13 @@ img {
     display: block;
 }
 
+.img-2 {
+    width: 600px;
+    height: 290px;
+    
+    display: block;
+    margin: auto;
+}
 .power-inputs {
     grid-column-start: 3;
     grid-column-end: 4;
@@ -217,3 +224,4 @@ input {
 .hover:hover {
     background-color: #557481;
 }
+

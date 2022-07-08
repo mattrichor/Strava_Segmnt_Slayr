@@ -6,7 +6,6 @@ let canvas = document.getElementById('pwr-graph')
 let riderWeight = document.getElementById('weight')
 let bikeWeight = document.getElementById('bike-weight')
 
-// let sysWeight = 158 * 0.453592
 let rollingRes = 0.005
 
 let aeroValues = [0.388, 0.42, 0.3]
@@ -16,8 +15,6 @@ let A2 = 0.5 * aeroValues[0] * airDensity
 let xValues = []
 let yValues = []
 let pwrChart
-
-//create 'onclick' for calculate power curve button
 
 new Chart('pwr-graph', {
   type: 'line'
