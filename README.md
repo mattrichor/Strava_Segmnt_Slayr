@@ -21,6 +21,11 @@ A tool to search, sort, and see how you'd compete on Strava segments. Base funct
 ***
 ### ***Getting Started***
 
+##### Surge Deployment
+The app is currently deployed on Surge at 
+
+***
+
 ##### Wireframe
 link here: (https://wireframe.cc/pro/pp/8dacb167c563295)
 
@@ -32,16 +37,19 @@ link here: (https://wireframe.cc/pro/pp/8dacb167c563295)
 ## Trello Board
 link here: (https://trello.com/b/ofKTtual/segmnt-slayr)
 - [X] API Call Segment List
-- [ ] Segment List Sorting
+- [X] Segment List Sorting
 - [X] Input Forms for Power Zones
 - [X] Power Zones Graph
-- [ ] Estimated Time on Segment
+- [X] Estimated Time on Segment
 
 ***
 
 ### ***Credits***
 
 - Big thanks to Strava for their API! 
+- Claps for Surge for their hosting 
+- Curt Austin at BikeCalculator.com for the walkthrough of the power & time conversion math! 
+- Everyone at General Assembly who put up with my endless questions & helped me solve complex issues, Y'all are the real MVPs <3
 
 
 

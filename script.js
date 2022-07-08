@@ -217,7 +217,7 @@ reAuthorize()
 let sortTable = Array.from(document.querySelectorAll('.sortable'))
 let table = document.getElementById('table')
 
-console.log(sortTable)
+// Sort tables. I want to eventually make this into only one function (current is not DRY) but this is okay for now.
 
 function sortSegmentsNum(j) {
   let switchCount = 0

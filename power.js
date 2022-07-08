@@ -16,13 +16,16 @@ let A2 = 0.5 * aeroValues[0] * airDensity
 let xValues = []
 let yValues = []
 let pwrChart
+
 //create 'onclick' for calculate power curve button
+
 new Chart('pwr-graph', {
   type: 'line'
 })
 
 const calcPowerChart = () => {
   image.style.opacity = '0'
+  image.style.height = '1px'
 
   let yValues = [{ x: 5, y: pwr5Sec.value }]
   let i = 0
@@ -96,6 +99,8 @@ const calcPowerChart = () => {
   console.log(yValues)
 }
 
+// reset button!
+
 const resetZones = () => {
   yValues = []
   xValues = []
@@ -107,6 +112,7 @@ const resetZones = () => {
   powerButton.addEventListener('click', calcPowerChart)
   image.style.opacity = '1'
   image.style.display = 'block'
+  image.style.height = '290px'
   new Chart('pwr-graph', {
     type: 'line'
   })
@@ -116,18 +122,7 @@ const resetZones = () => {
 
 //Maths!
 
-//resistance from: hoods, tops, drops
-
-//find force from
-
 let frontalArea = 0.388 // meters^2
-//kg/m^3
-
-// powerv = (v * tres + v * tv * tv * A2Eff) / transv
-// tres = twt * (gradev + rollingRes)
-// let transv = 0.95
-
-// let mass = 8.1 * sysWeight * 0.453592
 
 let slayrMenu = document.getElementById('slayr-menu')
 let timeEstimate = document.getElementById('time-guess')
@@ -136,10 +131,6 @@ let pwrDisplay = document.getElementById('pwr-needed')
 let slayrName = document.getElementById('slayr-name')
 
 slayrMenu.style.opacity = 0
-slayrMenu.style.backgroundColor = 'rgba ,,,0'
-
-resetBtn.addEventListener('click', resetZones)
-powerButton.addEventListener('click', calcPowerChart)
 
 const showWattsMenu = (i) => {
   slayrMenu.style.opacity = 1
@@ -161,3 +152,6 @@ const showWattsMenu = (i) => {
   }
   calcWattsBtn.addEventListener('click', calculateWatts)
 }
+
+resetBtn.addEventListener('click', resetZones)
+powerButton.addEventListener('click', calcPowerChart)

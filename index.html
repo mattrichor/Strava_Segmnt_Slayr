@@ -6,81 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="d3.min.js"></script>
-    <script defer src="script.js" charset="utf-8"></script>
-    <script defer src="power.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;1,100&family=League+Gothic&family=Orbitron&family=Press+Start+2P&family=Smooch&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-<h1>Strava Segmnt Slayr</h1>
-<div class="container" > 
-    <!-- power zones graph -->
-    <div class="empty"></div>
-    <div id="graph">
-        <img id="img" src="Graph-backing-2.png">
-        <canvas id="pwr-graph"> </canvas></div>
-    <div class="power-inputs">
-        <ul>
-        <li><input type="number" id="5sec" placeholder="5 Sec Power" /></li>
-        <li><input type="number" id="1min" placeholder="1 Min Power" /></li>
-        <li><input type="number" id="5min" placeholder="5 Min Power" /></li>
-        <li><input type="number" id="20min" placeholder="20 Min Power" /></li>
-        <li><input type="number" id="weight" placeholder="Your Weight (lb)" /></li>
-        <li><input type="number" id="bike-weight" placeholder="Bike Weight (lb)" /></li>
-        <li><button id="calculate-curve"> Calculate Power Curve</button></li>
-        <li><button id="reset">Reset</button></li>
-    </ul>
-    </div>
-</div>
-
-<div>
-    <button id="load">Load Starred Segments</button>
-    <div id="loadProgress"></div>
-        <div id="loadBar"></div>
-</div>
-
-<div class="search-section">  
-        <input type="text" id="search-input" placeholder="Segment Name" />
-        <button id="nameSearch">Search By Name</button>
-        <button id="random">Random Segment</button>
-        <button id="search">Send It! (All Starred Segments)</button>
-        
-</div> 
-    
-</div>
-
-<!-- Segment Display Section  -->
-
-    <table class="slayr">
-        <tr id="slayr-menu">
-        <td>SEGMNT SLAYR</td>
-        <td id="slayr-name">Name: </td>
-        <td class="estimate"> <input type="number" id="time-guess" placeholder="Estimated Time" /></td>
-        <td><button id="est-watts"> ESTIMATE WATTS</button></td>
-        <td id="pwr-needed">Power Needed:</td>
-
-    </tr></table>
-    <table id="table">
-    <tr class="table-top">
-        <th class='sortable'onclick="sortSegments(0)">Name</th>
-        <th class='sortable'onclick="sortSegmentsNum(1)">Distance</th>
-        <th class='sortable'onclick="sortSegmentsNum(2)">Gradient</th>
-        <th class='sortable'onclick="sortSegmentsNum(3)">Climb Category</th>
-        <th class='sortable'onclick="sortSegments(4)">PR Time</th>
-        
-    </tr>
-    <tbody class="segment-list">
-    <!-- segment list items will display here -->
-    </tbody>
-</table>
-<div class="estimate">
-   
-    
-
-</div>
+    <h1>Welcome to Strava Segmnt Slayr!</h1>
+    <h2>Sort your starred segments & see how you'd compete on them in realtime</h2>
+    <div id="fakeButton">
+        <a href="https://www.strava.com/oauth/authorize?client_id=89151&redirect_uri=http://127.0.0.1:5504/main.html&response_type=code&scope=read_all">Login With Strava</a>
+        </div>
 </body>
 </html>
