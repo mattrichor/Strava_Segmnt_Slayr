@@ -1,5 +1,12 @@
 //* logic for the graph computation & segment time analysis */
 
+let image = document.getElementById('img')
+let resetBtn = document.getElementById('reset')
+let canvas = document.getElementById('pwr-graph')
+let riderWeight = document.getElementById('weight')
+let bikeWeight = document.getElementById('bike-weight')
+
+let sysWeight = riderWeight + bikeWeight
 let xValues = []
 let yValues = []
 let pwrChart
@@ -99,40 +106,54 @@ const resetZones = () => {
   })
 }
 
-let image = document.getElementById('img')
-let resetBtn = document.getElementById('reset')
-let canvas = document.getElementById('pwr-graph')
+//Maths!
+
+let aeroValues = [0.388, 0.42, 0.3] //resistance from: hoods, tops, drops
+
+//find force from
+
+let frontalArea = 0.388 // meters^2
+let airDensity = 1.2225 //kg/m^3
+
+// let force =
+// let force =
+// (aeroValues[1] / 2) * airDensity * frontalArea * (velocity * velocity)
+// let rollingRes = 0.005
+// let totalRes = mass * ((8.1 * 0.01) + rollingRes)
+let meterDis = 3.12 * 1609.34
+// let velocity = meterDis / timeEstimate.value
+// let powerNeeded = (force * velocity)
+
+//NEED ROLLING RESISTANCE WITH RESPECT FOR AIR DENSITY AND FRONTAL AREA AND AERO
+
+let calcWattsBtn = document.getElementById('est-watts')
+let timeEstimate = document.getElementById('time-guess')
+
+const calcWatts = () => {
+  let sysWeight = 158 * 0.453592
+  let rollingRes = 0.005
+  let A2 = 0.5 * 0.388 * airDensity //aeroValues
+
+  let meterDis = 3.12 * 1609.34
+  let totalWeight = 9.8 * sysWeight
+  let gradeV = 8.1 * 0.01
+  let totalRes = totalWeight * (gradeV + rollingRes)
+
+  let velocity = meterDis / 1320
+  let powerNeeded =
+    (velocity * totalRes + velocity * velocity * velocity * A2) / 0.95
+
+  console.log(powerNeeded)
+}
+
+// powerv = (v * tres + v * tv * tv * A2Eff) / transv
+// tres = twt * (gradev + rollingRes)
+// let transv = 0.95
+
+// let mass = 8.1 * sysWeight * 0.453592
+
+calcWatts()
 
 resetBtn.addEventListener('click', resetZones)
 powerButton.addEventListener('click', calcPowerChart)
-
-//Maths!
-
-// v = (eval(velocity.value) / 3.6) * (units ? 1.609 : 1.0) // converted to m/s;
-// tv = v + headwindv
-// let A2Eff = tv > 0.0 ? A2 : -A2 // wind in face, must reverse effect
-// powerv = (v * tres + v * tv * tv * A2Eff) / transv
-
-// if (v > 0.0) t = (16.6667 * distancev) / v // v is m/s here, t is in minutes
-// else t = 0.0 // don't want any div by zero errors
-
-// power.value = makeDecimal0(powerv)
-// dragSlider.setValue(powerv / 500.0)
-
-// const newton = (aero, hw, tr, tran, p) => {
-//   /* Newton's method */
-
-//   let vel = 20 // Initial guess
-//   let MAX = 10 // maximum iterations
-//   let TOL = 0.05 // tolerance
-//   for (i = 1; i < MAX; i++) {
-//     let tv = vel + hw
-//     let aeroEff = tv > 0.0 ? aero : -aero // wind in face, must reverse effect
-//     let f = vel * (aeroEff * tv * tv + tr) - tran * p // the function
-//     let fp = aeroEff * (3.0 * vel + hw) * tv + tr // the derivative
-//     let vNew = vel - f / fp
-//     if (Math.abs(vNew - vel) < TOL) return vNew // success
-//     vel = vNew
-//   }
-//   return 0.0 // failed to converge
-// }
+calcWattsBtn.addEventListener('click', calcWatts)
