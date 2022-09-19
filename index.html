@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;1,100&family=League+Gothic&family=Orbitron&family=Press+Start+2P&family=Smooch&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
-</head>
-<body class="intro">
+  </head>
+  <body class="intro">
     <h1>Welcome to Strava Segmnt Slayr!</h1>
-    <h2>Sort your starred segments & see how you'd compete on them in realtime</h2>
+    <h2>
+      Sort your starred segments & see how you'd compete on them in realtime
+    </h2>
     <div id="fakeButton">
-        <a href="https://www.strava.com/oauth/authorize?client_id=89151&redirect_uri=http://127.0.0.1:5504/main.html&response_type=code&scope=read_all">Login With Strava</a>
-        </div>
-        <div class="image"> <img id="img" src="graph-backing-4.png">
-        </div>
-</body>
+      <a
+        href="https://www.strava.com/oauth/authorize?client_id=89151&redirect_uri=http://segmnt-slayr.netlify.app//main.html&response_type=code&scope=read_all"
+        >Login With Strava</a
+      >
+    </div>
+    <div class="container"><img id="img" src="graph-backing-4.png" /></div>
+  </body>
 </html>
