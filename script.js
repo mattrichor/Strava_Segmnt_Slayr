@@ -1,6 +1,6 @@
 const clientSecret = `25d5efd65d8b5cab2e461ebe98e3117b76766e8e`
 let accessToken = `8a15d84d3f5dce03a5fd1e3eabf95ed314b0b117`
-let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${accessToken}` //old one, only works if accessToken is hard coded & up to date
+// let starredSegmentsLink = `https://www.strava.com/api/v3/segments/starred?page=1&per_page=30&access_token=${accessToken}` //old one, only works if accessToken is hard coded & up to date
 const refreshToken = `34a4515d34fcddd543ed7a03b8e572397a6386b7`
 const clientId = `89151`
 
